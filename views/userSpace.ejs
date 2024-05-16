@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= heading %></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/user_space.css">
+    </head>
+    <body>
+        <div>
+            <div class="nav-bar">
+                <img src="../assets/images/logo.JPG" class="col-1"></img>
+                <!-- form tag for search products -->
+                <form action="/user/detailed_view" method="POST" style="display: inline;" class="col-1">
+                    <input type="search" onkeyup="sendData(this)" name="product_name" class="search_box" placeholder="Hello <%=user_name%>, Loot name?🧐">
+                    <button class="searchButton" type="submit">Let's find😋</button> 
+                </form>
+                
+                <div class="cart-and-signout">
+                    <span style="margin-top:5px;">
+                        <div class="cart-count">
+                            <%if(cart.length===1){%>
+                                0
+                            <%}%>
+                            <%if(cart.length>1){%>
+                                <%=cart.length-1%>
+                            <%}%>
+                        </div>
+                        <a href="/user/open_cart">
+                            <i class="fa-solid fa-2x fa-cart-shopping" style="color: yellow;"></i>
+                        </a>
+                    </span>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <a href="/admin/signOut" class="col-1"><i class="fa-solid fa-3x fa-right-from-bracket sign_out"></i></a>
+                </div>
+                
+            </div>
+            <section class="search_results">
+            </section>
+            <div class="innerDiv xs-grid">
+                <!-- Every existing products from the sakthi store DB is rendered here -->
+                <%if(products){%>
+                    <% for(let product of products){%>
+                        <div class="product_details">
+                        <form action="/user/detailed_view" method="post">
+                            <input type="hidden" name="product_name" value="<%=product.productName%>">
+                            <div>
+                                <ul>
+                                    <li class="product_name"><h4><%=product.productName %></h4></li>
+                                    <center>
+                                        <button style="background: none; border: none;">
+                                        <img src="../assets/images/products/<%=product.imageName%>" alt="image" role="button">
+                                    </button>
+                                    </center>
+                                    <br>
+                                    <li><b>Price : </b> Rs.<%=product.price %></li>
+                                    <li><b>Rating : </b> <%= product.productRating%>/5</li>
+                                    <li><b>In Stock : </b><%= product.qtyAvailable%> Qty</li>
+                                </ul>
+                                <div>
+                                    <a href="/user/add_to_cart/?prod_image=<%=product.imageName%>&prod_name=<%=product.productName%>&prod_price=<%=product.price%>">
+                                    <button type="button" class="add-to-cart buy-now-and-add-cart">
+                                        <b>
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <h4 class="d-inline-flex">ADD TO CART<h4>    
+                                        </b>
+                                    </button>
+                                    </a>
+                                    <a href="/user/buyNow"><button type="button" class="buy-now buy-now-and-add-cart"><b> <i class="fa-solid fa-bolt"></i> <h4 class="d-inline-flex">BUY NOW<h4></b></button></a>
+                                </div>
+                            </div>
+                         </form>
+                        </div>
+                    <%}%>    
+                <%}%>
+            </div>
+            <br><br>
+            <div class="footer-div">
+                <button class="back-to-top" onclick="scrollToTop()">Back to top</button>
+                <div class="info-divs">
+                    <div class="desc info-div">
+                        <h2>Sakthi Stores</h2>
+                        <p>An ecommerce business uses digital methods to sell products and services to customers. Ecommerce businesses can be online-only or have a physical presence as well. Selling to customers online typically requires a website or digital storefront, plus a way to process payments digitally and ship orders to customers.</p>
+                    </div>
+                    <div class="info-div"> 
+                        <h2>Address</h2>
+                        <p>Oodaimedu,<br>
+                        Mountain road,<br>
+                        Oodaimedu 4 cross road,<br>
+                        Anthiyur,<br>
+                        Erode.<br>
+                        PIN - 638 501</p>
+                    </div>
+                    <div style="margin-left: 30px;" class="info-div">
+                        <h2>About Us</h2>
+                        <p>
+                            <b>Founder:</b> K Sakthivel<br>
+                            <b>CEO:</b> K Sakthivel<br>
+                            <b>Products Admin:</b> K Sakthivel<br>
+                            <b>Website Designer:</b> K Sakthivel<br>
+                            <b>Seller:</b> K Sakthivel<br>
+                            <b>Logistics:</b> K Sakthivel<br>
+                            <b>Customer:</b>  K Sakthivel<br>
+                        </p>
+                    </div>
+
+                </div>
+                <div style="text-align: center;" >
+                    <ul style="display: inline-flex;" class="follow-us">
+                        <li><a href="https://www.facebook.com/KLSakthi.333" target="_blank"><i class="fa-brands fa-2x fa-facebook"></a></i></li>
+                        <li><a href="https://www.instagram.com/haha_sakthi_ks333" target="_blank"><i class="fa-brands fa-2x fa-square-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/klsakthi333" target="_blank"><i class="fa-brands fa-2x fa-square-x-twitter twitter"></i></a></li>
+                        <li><a href="https://github.com/sakthivel-programmer" target="_blank"><i class="fa-brands fa-2x fa-github"></i></a></li>
+                    </ul>
+                    <br><br>
+                    <p class="copyright">Copyright @ Sakthi Stores 2023 All rights reserved</p>
+                </div> 
+            </div>
+        </div>
+        
+        
+        <script>
+            function scrollToTop(){
+                document.body.scrollTop=0;
+                document.documentElement.scrollTop=0;
+            }
+            // Function to get realtime search results from database and AJAX call
+            function sendData(e){
+                let searchResults = document.querySelector(".search_results")
+                let match=e.value.match(/^[a-zA-Z ]*/);
+                let match2=e.value.match(/\s*/);
+                if(match2[0]===e.value){
+                    searchResults.innerHTML="";
+                    return;
+                };
+                if (match[0] === e.value){
+                    fetch("searching",{
+                        method:"POST",
+                        headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify({payload:e.value})
+                    }).then(res=> res.json()).then(data=>{
+                        let payload = data.payload;
+                        searchResults.innerHTML="";
+                    if(payload.length < 1 ) {
+                        searchResults.innerHTML="<p> No results found</p>";
+                        return;
+                    }
+                    payload.forEach((item,index) => {
+                        searchResults.innerHTML += `<form action="/user/detailed_view" method="POST">
+                                                        <input type="hidden" name="product_name" value="${item.productName}">
+                                                        <button style="background: none; border: none;">${item.productName}</button>
+                                                    </form>`
+                    }); 
+                });
+                return;
+                }
+                searchResults.innerHTML="";   
+            }
+        </script>
+        <script src="https://kit.fontawesome.com/91b25f8033.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>
