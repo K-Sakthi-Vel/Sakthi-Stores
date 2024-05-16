@@ -1,7 +1,7 @@
 # E-Commerce-Website
 SAKTHI STORES ONLINE SHOPPING
 <br>
-LIVE APP: https://sakthi-stores-online-shop.cyclic.app/
+LIVE APP: https://sakthi-stores.onrender.com/
 <br>
 <br>
 Sakthi Stores is online shopping plateform which allows users to do haha shopping.<br>
